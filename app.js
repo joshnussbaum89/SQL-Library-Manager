@@ -4,8 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+// dictates routes for the app
+const booksRouter = require('./routes/books');
 
 const app = express();
 
@@ -19,9 +19,9 @@ const { sequelize } = require('./models');
 
   try {
     await sequelize.authenticate();
-    // console.log('Connection has been established successfully.');
+    console.log('Connection has been established successfully.');
   } catch (error) {
-    // console.error('Unable to connect to the database:', error);
+    console.error('Unable to connect to the database:', error);
   }
 })();
 
@@ -36,8 +36,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', booksRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

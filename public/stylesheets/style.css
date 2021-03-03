@@ -1,6 +1,9 @@
+/* fonts */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
+
 body {
   padding: 10px 50px 50px;
-  font: 18px "Garamond", serif;
+  font: 18px "Noto Sans JP", sans-serif;
 }
 
 a {
@@ -18,7 +21,6 @@ a.button,
 input[type="submit"] {
   color: white;
   background: #019875;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 10px 14px 12px;
   font-size: 14px;
   border-radius: 2px;
