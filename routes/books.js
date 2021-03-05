@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Book = require('../models').Book;
-const Sequelize = require('sequelize');
-// const Op = Sequelize.Op;
 const { Op } = require('sequelize');
 
 /* Handler function to wrap each route. */
@@ -24,28 +22,38 @@ router.get('/', asyncHandler(async (req, res) => {
 
 // Shows the full list of books (homepage)
 router.get('/books/', asyncHandler(async (req, res) => {
-
-  // SEARCH FOR BOOKS (NOT WORKING)
-  let { search } = req.params;
+  
+  // Search for books
+  let { search } = req.query;
   let books;
 
   if (search) {
-    console.log(search);
     books = await Book.findAll({
       attributes: ['id', 'title', 'author', 'genre', 'year'],
       where: {
-        title: {
-          [Op.or]: `%${search}%`
-        },
-        author: {
-          [Op.or]: `%${search}%`
-        },
-        genre: {
-          [Op.or]: `%${search}%`
-        },
-        year: {
-          [Op.or]: `%${search}%`
-        }
+        [Op.or]: [
+          {
+            title: {
+              [Op.like]: `%${search}%`
+            }
+          },
+          {
+            author: {
+              [Op.like]: `%${search}%`
+            }
+          },
+          {
+            genre: {
+              [Op.like]: `%${search}%`
+            }
+          },
+          {
+            year: {
+              [Op.like]: `%${search}%`
+            }
+          },
+
+        ]
       }
     });
   } else {
@@ -58,13 +66,20 @@ router.get('/books/', asyncHandler(async (req, res) => {
       ]
     });
   }
-  // render books 
-  res.render('index', {
-    books,
-    title: 'Library Application',
-    id: books.id
-  });
 
+  // Check to see if there are results from search
+  if (books.length < 1) {
+    res.render('index', {
+      books,
+      title: 'Try another search...',
+    });
+  } else {
+    res.render('index', {
+      books,
+      title: 'Library Application',
+      id: books.id
+    });
+  }
 }));
 
 // 'Create new book' route 

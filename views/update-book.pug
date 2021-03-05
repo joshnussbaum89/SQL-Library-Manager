@@ -1,6 +1,7 @@
 extends layout
 
 block content
+    h1 Edit Book
     form.edit-form(action="/books/" + id, method="post")
         p
             label(for="title") Title
