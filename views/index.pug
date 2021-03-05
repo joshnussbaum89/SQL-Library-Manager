@@ -1,9 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  p: a.button(href="/books/new") Create New Book
+  div.header
+    h1= title
+    //- p Welcome to #{title}
+  div.navigation
+    div
+      p: a.button(href="/books/new") Create New Book
+    form.search(method='get' action=`/books/`)
+      input.search-input(type='text' name='search' placeholder='Title, author etc.')
+      input.button(type='submit' value='Search')
   table
     thead
       tr

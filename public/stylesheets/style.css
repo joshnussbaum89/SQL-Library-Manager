@@ -1,35 +1,66 @@
 /* fonts */
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
 
+/* root styles */
+:root {
+  --main: #5e8d5a;
+  --secondary: #ee6f68;
+}
+
 body {
-  padding: 10px 50px 50px;
-  font: 18px "Noto Sans JP", sans-serif;
+  padding: 1rem;
+  font: 1rem "Noto Sans JP", sans-serif;
+  font-weight: 200;
+}
+
+/* app container */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+}
+
+.header {
+  text-align: center;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.search {
+  width: 300px;
 }
 
 a {
-  color: #019875;
+  color: var(--main);
   text-decoration: none;
   font-weight: bold;
   transition: 0.4s;
 }
 
 a:hover {
-  color: black;
+  color: var(--secondary);
 }
 
 a.button,
 input[type="submit"] {
   color: white;
-  background: #019875;
+  background: var(--main);
   padding: 10px 14px 12px;
   font-size: 14px;
   border-radius: 2px;
   cursor: pointer;
 }
 
-form a.button,
+.edit-form .button,
 input[type="submit"] {
-  margin-left: 140px;
+  /* margin-left: 140px; */
   transition: 0.4s;
 }
 
@@ -39,7 +70,7 @@ input[type="submit"] {
 
 a.button:hover,
 input[type="submit"]:hover {
-  background-color: #01b189;
+  background-color: var(--secondary);
 }
 
 p {
@@ -51,6 +82,10 @@ ul {
   list-style-type: none;
   margin-bottom: 10px;
   line-height: 1.3em;
+}
+
+h1 {
+  font-weight: 300;
 }
 
 h2 {
@@ -94,9 +129,27 @@ input {
 
 input[type="text"] {
   margin-left: 7px;
-  width: 300px;
+  width: 60%;
+  /* max-width: 300px; */
 }
 
 .error {
   color: rgb(236, 15, 15);
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+  }
+
+  .navigation {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0;
+  }
 }

@@ -1,4 +1,4 @@
-const createError = require('http-errors');
+// const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -15,7 +15,7 @@ const { sequelize } = require('./models');
 (async () => {
 
   // Sync model with database
-  await sequelize.sync({ force: true });
+  // await sequelize.sync({ force: true });
 
   try {
     await sequelize.authenticate();
@@ -43,6 +43,7 @@ app.use((req, res, next) => {
   const error = new Error("Not Found");
   error.status = 404;
   error.message = "Whoops, page not found.";
+  res.render('page-not-found', { error })
   console.log(`${error.message} Error status: ${error.status}`);
   next(error);
   // next(createError(404));
@@ -50,13 +51,13 @@ app.use((req, res, next) => {
 
 // error handler
 app.use((err, req, res, next) => {
-  // // set locals, only providing error in development
+  // set locals, only providing error in development
   // res.locals.message = err.message;
   // res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // // render the error page
+  // render the error page
   // res.status(err.status || 500);
-  // res.render('error');
+  // res.render('error', err);
   res.locals.error = err;
   res.status(err.status);
 
@@ -64,8 +65,7 @@ app.use((err, req, res, next) => {
     res.status(404).render("page-not-found", { err });
   } else {
     err.status = 500;
-    err.message = err.message || "Whoops, internal server error.";
-    res.status(500).render("error", err);
+    res.status(500).render("error", { err });
     console.log(`${err.message} Error status: ${err.status}`);
   }
 });
