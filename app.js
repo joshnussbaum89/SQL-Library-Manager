@@ -1,10 +1,9 @@
-// const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-// dictates routes for the app
+// Dictates routes for the app
 const booksRouter = require('./routes/books');
 
 const app = express();
@@ -12,11 +11,8 @@ const app = express();
 // Import sequelize instance from models/index.js
 const { sequelize } = require('./models');
 
+// Test connection
 (async () => {
-
-  // Sync model with database
-  // await sequelize.sync({ force: true });
-
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
@@ -26,7 +22,7 @@ const { sequelize } = require('./models');
 })();
 
 
-// view engine setup
+// View engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -36,6 +32,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Books routing
 app.use('/', booksRouter);
 
 // catch 404 and forward to error handler
@@ -48,7 +45,7 @@ app.use((req, res, next) => {
   next(error);
 });
 
-// error handler
+// Error handler
 app.use((err, req, res, next) => {
   res.locals.error = err;
   res.status(err.status);

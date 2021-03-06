@@ -22,7 +22,6 @@ router.get('/', asyncHandler(async (req, res) => {
 
 // Shows the full list of books (homepage)
 router.get('/books/', asyncHandler(async (req, res) => {
-  
   // Search for books
   let { search } = req.query;
   let books;
@@ -52,17 +51,15 @@ router.get('/books/', asyncHandler(async (req, res) => {
               [Op.like]: `%${search}%`
             }
           },
-
         ]
       }
     });
   } else {
     books = await Book.findAll({
+      offset: 0,
+      limit: 5,
       order: [
-        [
-          "createdAt",
-          "ASC"
-        ]
+        ["createdAt", "ASC"]
       ]
     });
   }
@@ -79,6 +76,38 @@ router.get('/books/', asyncHandler(async (req, res) => {
       title: 'Library Application',
       id: books.id
     });
+  }
+}));
+
+// pagination (NOT FINISHED BUT ITS WORKING)
+router.get("/books/page/:page", asyncHandler(async (req, res) => {
+  let page = req.params.page;
+  page = +page;
+  let totalBooks;
+  let totalPages;
+
+  const books = await Book.findAll({
+    limit: 5,
+    offset: (page * 5) - 5,
+    page
+  });
+
+  totalBooks = await Book.count();
+  totalPages = Math.ceil(totalBooks / 5);
+
+  if (page > 0 && page <= totalPages) {
+    res.render("index", {
+      books,
+      title: 'Library App',
+      page,
+      totalBooks,
+      totalPages
+    });
+  } else {
+    const error = new Error();
+    error.message = "Whoops, page not found.";
+    error.status = 404;
+    throw error;
   }
 }));
 
