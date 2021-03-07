@@ -79,7 +79,7 @@ router.get('/books/', asyncHandler(async (req, res) => {
   }
 }));
 
-// pagination (NOT FINISHED BUT ITS WORKING)
+// Pagination 
 router.get("/books/page/:page", asyncHandler(async (req, res) => {
   let page = +req.params.page;
   let totalBooks;
