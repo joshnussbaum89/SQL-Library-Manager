@@ -4,16 +4,19 @@
 /* root styles */
 :root {
   --main: #5e8d5a;
-  --secondary: #ee6f68;
+  --secondary: #84b180;
 }
 
 body {
+  background: url("../images/books.jpg");
+  backdrop-filter: grayscale(30%);
+  background-size: cover;
   padding: 1rem;
   font: 1rem "Noto Sans JP", sans-serif;
   font-weight: 200;
 }
 
-/* app container */
+/* App container */
 .container {
   display: flex;
   flex-direction: column;
@@ -21,6 +24,7 @@ body {
   margin: auto;
 }
 
+/* Header, navigation and search */
 .header {
   text-align: center;
 }
@@ -30,26 +34,48 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2rem 0;
+  margin: 1rem 0 2rem;
 }
 
 .search {
-  width: 300px;
+  margin-top: 0.5rem;
+  display: flex;
+  align-content: center;
 }
 
+.search .button {
+  margin-left: 0.2rem;
+}
+
+.pagination {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.next {
+  margin-left: auto;
+}
+
+/* Links, inputs, and buttons */
 a {
-  color: var(--main);
+  font-weight: 400;
+  color: black;
   text-decoration: none;
-  font-weight: bold;
-  transition: 0.4s;
+  transition: 0.2s;
 }
 
-a:hover {
+a:hover:not(.pagination-btn) {
   color: var(--secondary);
 }
 
 a.button,
-input[type="submit"] {
+input[type="submit"],
+input[type="submit"].button,
+.pagination-btn {
+  font-weight: 400;
   color: white;
   background: var(--main);
   padding: 10px 14px 12px;
@@ -60,7 +86,6 @@ input[type="submit"] {
 
 .edit-form .button,
 input[type="submit"] {
-  /* margin-left: 140px; */
   transition: 0.4s;
 }
 
@@ -69,10 +94,13 @@ input[type="submit"] {
 }
 
 a.button:hover,
-input[type="submit"]:hover {
+input[type="submit"]:hover,
+.pagination-btn:hover {
+  color: white;
   background-color: var(--secondary);
 }
 
+/* Main styles */
 p {
   margin: 20px auto;
 }
@@ -85,7 +113,10 @@ ul {
 }
 
 h1 {
+  margin: 0;
+  font-size: 2.5rem;
   font-weight: 300;
+  color: white;
 }
 
 h2 {
@@ -93,8 +124,12 @@ h2 {
   padding-top: 20px;
 }
 
+table {
+  border-spacing: 0;
+}
+
 th {
-  border-bottom: 2px solid #d8b493;
+  border-bottom: 2px solid var(--main);
   text-align: left;
   padding: 5px 20px 5px 10px;
 }
@@ -107,12 +142,18 @@ tr:nth-child(2n) {
   background: #e7e7e7;
 }
 
+tr:nth-child(2n + 1) {
+  background: white;
+}
+
 td {
   padding: 5px 20px 5px 10px;
 }
 
 label {
-  font-weight: bold;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 400;
   min-width: 130px;
   display: inline-block;
   transition: 0.4s;
@@ -122,15 +163,14 @@ input {
   padding: 10px;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 14px;
+  border: 1px solid white;
   border-radius: 2px;
-  border-color: #e7e7e7;
   transition: 0.4s;
 }
 
 input[type="text"] {
   margin-left: 7px;
   width: 60%;
-  /* max-width: 300px; */
 }
 
 .error {
@@ -151,5 +191,9 @@ input[type="text"] {
     justify-content: space-between;
     align-items: center;
     margin: 2rem 0;
+  }
+
+  .search {
+    margin-top: 0;
   }
 }

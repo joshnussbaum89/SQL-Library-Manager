@@ -24,7 +24,14 @@ block content
           td= book.author
           td= book.genre
           td= book.year
-    //- not finished but its working
-    
-    a(href=`/books/page/${page + 1 || 2}`) next
-    a(href=`/books/page/${page - 1}`) prev
+  div.pagination
+    if page
+      if page > 1 && page < totalPages
+        a.pagination-btn.prev(href=`/books/page/${page - 1}`) &#8592
+        a.pagination-btn.next(href=`/books/page/${page + 1 || 2}`) &#8594
+      else if page >= 1 && page == totalPages
+        a.pagination-btn.prev(href=`/books/page/${page - 1}`) &#8592
+      else if page == 1
+        a.pagination-btn.next(href=`/books/page/${page + 1 || 2}`) &#8594
+    else
+      a.pagination-btn.next(href=`/books/page/${page + 1 || 2}`) &#8594
