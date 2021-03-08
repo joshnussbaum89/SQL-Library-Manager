@@ -73,7 +73,7 @@ router.get('/books/', asyncHandler(async (req, res) => {
   } else {
     res.render('index', {
       books,
-      title: 'Library Application',
+      title: 'Library App',
       id: books.id
     });
   }

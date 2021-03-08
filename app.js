@@ -40,7 +40,6 @@ app.use((req, res, next) => {
   const error = new Error("Not Found");
   error.status = 404;
   error.message = "Whoops, page not found.";
-  res.render('page-not-found', { error })
   console.log(`${error.message} Error status: ${error.status}`);
   next(error);
 });
