@@ -2,8 +2,7 @@ extends layout
 
 block content
   div.header
-    h1= title
-    //- p Welcome to #{title}
+    a.header-title(href="/"): h1= title
   div.navigation
     div
       p: a.button(href="/books/new") Create New Book

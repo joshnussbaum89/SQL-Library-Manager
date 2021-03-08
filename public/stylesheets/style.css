@@ -5,6 +5,7 @@
 :root {
   --main: #5e8d5a;
   --secondary: #84b180;
+  --grey: #e7e7e7;
 }
 
 body {
@@ -26,7 +27,17 @@ body {
 
 /* Header, navigation and search */
 .header {
+  display: block;
+  margin: auto;
   text-align: center;
+}
+
+.header-title h1 {
+  transition: 0.2s;
+}
+
+.header-title h1:hover {
+  color: var(--secondary);
 }
 
 .navigation {
@@ -49,7 +60,6 @@ body {
 
 .pagination {
   margin-top: 2rem;
-  width: 100%;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -67,14 +77,18 @@ a {
   transition: 0.2s;
 }
 
-a:hover:not(.pagination-btn) {
-  color: var(--secondary);
+a:hover {
+  color: var(--main);
+}
+
+input[type="submit"] {
+  border: 0;
 }
 
 a.button,
+.pagination-btn,
 input[type="submit"],
-input[type="submit"].button,
-.pagination-btn {
+input[type="submit"].button {
   font-weight: 400;
   color: white;
   background: var(--main);
@@ -86,11 +100,7 @@ input[type="submit"].button,
 
 .edit-form .button,
 input[type="submit"] {
-  transition: 0.4s;
-}
-
-input[type="submit"] {
-  border: 0;
+  transition: 0.2s;
 }
 
 a.button:hover,
@@ -120,7 +130,7 @@ h1 {
 }
 
 h2 {
-  border-top: 2px solid #e7e7e7;
+  border-top: 2px solid var(--grey);
   color: white;
   padding-top: 20px;
 }
@@ -140,7 +150,7 @@ tr {
 }
 
 tr:nth-child(2n) {
-  background: #e7e7e7;
+  background: var(--grey);
 }
 
 tr:nth-child(2n + 1) {
@@ -157,7 +167,7 @@ label {
   font-weight: 400;
   min-width: 130px;
   display: inline-block;
-  transition: 0.4s;
+  transition: 0.2s;
 }
 
 input {
@@ -166,7 +176,7 @@ input {
   font-size: 14px;
   border: 1px solid white;
   border-radius: 2px;
-  transition: 0.4s;
+  transition: 0.2s;
 }
 
 input[type="text"] {
